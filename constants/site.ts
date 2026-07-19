@@ -22,12 +22,12 @@ export const SOCIAL_LINKS = {
 export const NAVIGATION_LINKS = {
   main: [
     { label: 'Home', href: '/' },
+    { label: 'Explore', href: '/explore' },
     { label: 'Destinations', href: '/destinations' },
-    { label: 'Tours', href: '/tours' },
-    { label: 'AI Assistant', href: '/ai-assistant' },
+    { label: 'AI Planner', href: '/ai-planner' },
   ],
   footer: [
-    { label: 'About Us', href: '/about' },
+    { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
