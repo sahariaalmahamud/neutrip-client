@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
 :root {
   --background: #ffffff;
@@ -19,8 +20,68 @@
   }
 }
 
+/* Global App Styling rules */
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
 body {
-  background: var(--background);
+  min-height: 100%;
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* Custom Selection Color */
+::selection {
+  background-color: rgba(14, 165, 233, 0.2); /* Sky-500 at 20% opacity */
+  color: #0284c7; /* Sky-600 */
+}
+
+.dark ::selection {
+  background-color: rgba(56, 189, 248, 0.25); /* Sky-400 at 25% opacity */
+  color: #38bdf8; /* Sky-400 */
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e4e4e7; /* Zinc-200 */
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #27272a; /* Zinc-800 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a1a1aa; /* Zinc-400 */
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #52525b; /* Zinc-600 */
 }
