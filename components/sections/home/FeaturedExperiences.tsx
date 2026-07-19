@@ -26,20 +26,20 @@ export function FeaturedExperiences() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {FEATURED_EXPERIENCES.map((exp) => (
             <motion.div key={exp.id} variants={fadeUp}>
-              <Card className="group flex flex-col h-full bg-surface border border-border/80 hover:border-primary/45 rounded-2xl overflow-hidden shadow-card transition-all duration-300 hover:shadow-primary/5">
+              <Card className="group flex flex-col h-full bg-surface border border-border/80 hover:border-primary/45 rounded-2xl overflow-hidden shadow-card transition-all duration-300 hover:shadow-primary/10 hover:-translate-y-2">
                 {/* Card Cover Image */}
                 <div className="h-56 w-full relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={exp.image}
                     alt={exp.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent z-1" />
                   
                   {/* Category tag */}
-                  <span className="absolute top-4 left-4 z-10 text-[10px] font-bold uppercase tracking-wider bg-background/70 backdrop-blur-md text-accent border border-accent/25 px-2.5 py-1 rounded-full">
+                  <span className="absolute top-4 left-4 z-10 text-[10px] font-extrabold uppercase tracking-wider bg-black/50 backdrop-blur-md text-accent border border-accent/30 px-2.5 py-1 rounded-full">
                     {exp.tag}
                   </span>
                 </div>
@@ -48,7 +48,7 @@ export function FeaturedExperiences() {
                 <div className="p-5 flex-1 flex flex-col justify-between text-left">
                   <div>
                     {/* Location */}
-                    <div className="flex items-center gap-1.5 text-xs text-muted mb-2">
+                    <div className="flex items-center gap-1.5 text-xs text-muted mb-2.5">
                       <FiMapPin className="w-3.5 h-3.5 text-primary" />
                       <span>{exp.location}</span>
                     </div>
@@ -84,7 +84,7 @@ export function FeaturedExperiences() {
 
                     <Button
                       variant="ghost"
-                      className="rounded-xl border border-border bg-background hover:bg-surface hover:border-primary/40 text-foreground text-xs font-semibold cursor-pointer py-2 px-4 h-9"
+                      className="rounded-xl border border-border bg-background hover:bg-surface hover:border-primary/50 hover:text-primary text-foreground text-xs font-semibold cursor-pointer py-2 px-4 h-9.5 transition-all duration-300 hover:scale-105 active:scale-95"
                     >
                       Book Tour
                     </Button>

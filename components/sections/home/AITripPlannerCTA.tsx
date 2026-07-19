@@ -6,7 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { Button, Card } from '@heroui/react';
 import { MOCK_AI_ITINERARY } from '@/constants/home';
 import { FiCheck, FiCoffee, FiCompass, FiCamera, FiSmile, FiTarget, FiArrowRight } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { fadeUp, staggerChildren, scale } from '@/constants/motion';
 
 const iconMap = {
@@ -18,6 +18,19 @@ const iconMap = {
 };
 
 export function AITripPlannerCTA() {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Floating card animation
+  const floatAnimation = shouldReduceMotion ? {} : { y: [0, -10, 0] };
+  const floatTransition = shouldReduceMotion
+    ? {}
+    : {
+        duration: 5,
+        repeat: Infinity,
+        repeatType: 'reverse' as const,
+        ease: 'easeInOut' as const,
+      };
+
   return (
     <Section id="ai-planner" className="relative overflow-hidden w-full">
       {/* Background ambient lighting */}
@@ -69,7 +82,7 @@ export function AITripPlannerCTA() {
 
             <motion.div variants={fadeUp} className="mt-4">
               <Button
-                className="px-8 h-12 rounded-xl bg-primary text-background hover:opacity-90 font-semibold shadow-lg shadow-primary/20 cursor-pointer flex items-center gap-2 group w-max text-sm"
+                className="px-8 h-12 rounded-xl bg-primary text-background hover:opacity-90 font-semibold shadow-lg shadow-primary/20 cursor-pointer flex items-center gap-2 group w-max text-sm transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
               >
                 Plan Itinerary
                 <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -83,14 +96,16 @@ export function AITripPlannerCTA() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="lg:col-span-6 flex justify-center w-full"
+            animate={floatAnimation}
+            transition={floatTransition}
+            className="lg:col-span-6 flex justify-center w-full z-10"
           >
-            <Card className="glass-chat border border-border/80 p-5 md:p-6 rounded-2xl w-full max-w-lg shadow-floating relative overflow-hidden">
+            <Card className="glass-chat border border-border/80 p-5 md:p-6 rounded-2xl w-full max-w-lg shadow-floating relative overflow-hidden transition-colors duration-300">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -z-10 pointer-events-none" />
               
               {/* Mock Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-border/60 mb-5">
-                <div>
+              <div className="flex items-center justify-between pb-4 border-b border-border/60 mb-4">
+                <div className="text-left">
                   <span className="text-[10px] uppercase font-bold text-accent tracking-wider block">Generated Plan</span>
                   <h4 className="font-bold text-base text-foreground">Kyoto, Japan — Day 1</h4>
                 </div>
@@ -100,7 +115,7 @@ export function AITripPlannerCTA() {
               </div>
 
               {/* Timeline nodes */}
-              <div className="relative border-l-2 border-primary/25 ml-4 pl-6 flex flex-col gap-6 text-left">
+              <div className="relative border-l-2 border-primary/25 ml-4 pl-4 flex flex-col gap-3 text-left">
                 {MOCK_AI_ITINERARY.map((node, index) => {
                   const NodeIcon = iconMap[node.type] || FiCompass;
                   return (
@@ -109,11 +124,11 @@ export function AITripPlannerCTA() {
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.15 + index * 0.1 }}
-                      className="relative group"
+                      transition={{ delay: 0.15 + index * 0.08 }}
+                      className="relative group p-3 rounded-xl border border-transparent hover:border-primary/20 hover:bg-primary/5 transition-all duration-300 cursor-default"
                     >
                       {/* Node Bullet Icon */}
-                      <span className="absolute -left-[35px] top-1 w-6 h-6 rounded-full bg-surface border-2 border-primary/80 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-background transition-colors duration-300 shadow-md">
+                      <span className="absolute -left-[27px] top-4.5 w-6 h-6 rounded-full bg-surface border-2 border-primary/80 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-background group-hover:border-primary group-hover:scale-110 transition-all duration-300 shadow-md">
                         <NodeIcon className="w-3.5 h-3.5" />
                       </span>
 

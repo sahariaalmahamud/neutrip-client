@@ -34,14 +34,14 @@ export function WhyChooseNeutrip() {
             const Icon = iconMap[item.iconName] || FiCompass;
             return (
               <motion.div key={item.id} variants={fadeUp}>
-                <div className="card-container h-full flex flex-col items-start gap-4 text-left p-6">
-                  {/* Icon Circle */}
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shadow-sm">
-                    <Icon className="w-6 h-6" />
+                <div className="card-container h-full flex flex-col items-start gap-4 text-left p-6 group hover:-translate-y-1.5 transition-all duration-300">
+                  {/* Icon Circle wrapper with hover state rotation/scale */}
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-primary group-hover:text-background group-hover:border-primary group-hover:rotate-6 transition-all duration-500 ease-out">
+                    <Icon className="w-5.5 h-5.5" />
                   </div>
                   
                   {/* Title */}
-                  <h3 className="font-semibold text-lg text-foreground mt-2">
+                  <h3 className="font-semibold text-lg text-foreground mt-2 group-hover:text-primary transition-colors duration-300">
                     {item.title}
                   </h3>
                   

@@ -25,14 +25,19 @@ export function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {TESTIMONIALS.map((test) => (
             <motion.div key={test.id} variants={fadeUp} className="h-full">
-              <div className="glass-card shadow-card p-6 border border-border/80 rounded-2xl flex flex-col justify-between text-left h-full transition-all duration-300 hover:border-primary/30">
+              <div className="relative glass-card shadow-card p-6 border border-border/80 hover:border-primary/30 rounded-2xl flex flex-col justify-between text-left h-full transition-all duration-300 hover:shadow-primary/5 hover:-translate-y-1.5 overflow-hidden">
                 
-                {/* Review Header */}
-                <div>
+                {/* Background Large Quote Mark */}
+                <span className="absolute right-6 top-4 text-7xl select-none font-serif text-primary/10 leading-none pointer-events-none">
+                  &ldquo;
+                </span>
+
+                {/* Review Content */}
+                <div className="relative z-10">
                   {/* Rating Stars */}
                   <div className="flex items-center gap-0.5 text-accent mb-4">
                     {Array.from({ length: test.rating }).map((_, i) => (
-                      <FiStar key={i} className="w-4.5 h-4.5 fill-accent stroke-accent" />
+                      <FiStar key={i} className="w-4 h-4 fill-accent stroke-accent" />
                     ))}
                   </div>
                   
@@ -43,7 +48,7 @@ export function Testimonials() {
                 </div>
 
                 {/* Reviewer Details Footer */}
-                <div className="flex items-center gap-3.5 pt-4 border-t border-border/50">
+                <div className="flex items-center gap-3.5 pt-4 border-t border-border/50 relative z-10">
                   {/* Avatar */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
