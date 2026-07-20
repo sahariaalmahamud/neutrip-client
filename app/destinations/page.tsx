@@ -3,11 +3,11 @@ import { Metadata } from 'next';
 import { DestinationsCatalog } from '@/components/sections/destination/DestinationsCatalog';
 
 export const metadata: Metadata = {
-  title: 'Explore Destinations | Neutrip',
-  description: 'Explore curated global travel destinations, secret spots, and personalized AI recommendations on Neutrip.',
+  title: 'Destinations Catalog | Neutrip',
+  description: 'Browse all curated global destinations, luxury stays, cultural hubs, and scenic retreats on Neutrip.',
 };
 
-export default function ExplorePage() {
+export default function DestinationsPage() {
   return (
     <div className="flex flex-col w-full min-h-screen bg-background pb-16">
       <DestinationsCatalog />

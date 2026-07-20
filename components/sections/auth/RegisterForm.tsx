@@ -7,11 +7,13 @@ import { registerSchema, RegisterInput } from '@/lib/validations/auth';
 import { Button } from '@heroui/react';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiLoader } from 'react-icons/fi';
 import { SocialLoginButtons } from './SocialLoginButtons';
-import { toast } from 'sonner';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
 
+import { useAuth } from '@/providers/auth-provider';
+
 export function RegisterForm() {
+  const { registerWithEmail } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,16 +38,14 @@ export function RegisterForm() {
     },
   });
 
-  const onSubmitForm = (data: RegisterInput) => {
+  const onSubmitForm = async (data: RegisterInput) => {
     if (isLoading) return;
     setIsLoading(true);
-
-    // Simulate account registration server delay
-    setTimeout(() => {
+    try {
+      await registerWithEmail({ name: data.name, email: data.email, password: data.password });
+    } finally {
       setIsLoading(false);
-      console.log('Register submitted:', data);
-      toast.success('Successfully registered account! Please verify your email.');
-    }, 1500);
+    }
   };
 
   return (

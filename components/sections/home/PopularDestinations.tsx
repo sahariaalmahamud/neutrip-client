@@ -7,6 +7,7 @@ import { Card } from '@heroui/react';
 import { POPULAR_DESTINATIONS } from '@/constants/home';
 import { FiStar, FiArrowUpRight, FiHeart } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { fadeUp, staggerChildren } from '@/constants/motion';
 import { cn } from '@/utils/cn';
 
@@ -43,9 +44,10 @@ export function PopularDestinations() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {POPULAR_DESTINATIONS.map((dest) => (
             <motion.div key={dest.id} variants={fadeUp}>
-              <Card
-                className="group relative h-[380px] w-full overflow-hidden border border-border/60 hover:border-primary/45 bg-surface rounded-2xl transition-all duration-300 shadow-card hover:shadow-primary/10 flex flex-col justify-end p-0 cursor-pointer"
-              >
+              <Link href={`/destinations/${dest.id}`} className="block h-full w-full">
+                <Card
+                  className="group relative h-[380px] w-full overflow-hidden border border-border/60 hover:border-primary/45 bg-surface rounded-2xl transition-all duration-300 shadow-card hover:shadow-primary/10 flex flex-col justify-end p-0 cursor-pointer"
+                >
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -108,7 +110,8 @@ export function PopularDestinations() {
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </Link>
+          </motion.div>
           ))}
         </div>
       </Container>

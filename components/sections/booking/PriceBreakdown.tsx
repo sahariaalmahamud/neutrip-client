@@ -32,8 +32,7 @@ export function PriceBreakdown({ basePrice, appliedPromo, setAppliedPromo, isLoa
   const taxAmount = taxableAmount * TAX_RATE;
   const grandTotal = taxableAmount + taxAmount + SERVICE_FEE;
 
-  const handleApplyPromo = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleApplyPromoDirect = () => {
     if (!promoInput.trim()) return;
 
     // Case-insensitive verification check
@@ -95,7 +94,7 @@ export function PriceBreakdown({ basePrice, appliedPromo, setAppliedPromo, isLoa
       </div>
 
       {/* Promo Code Input Block */}
-      <form onSubmit={handleApplyPromo} className="flex flex-col gap-2 mt-2 pt-3 border-t border-border/40">
+      <div className="flex flex-col gap-2 mt-2 pt-3 border-t border-border/40">
         <label htmlFor="promo-input" className="text-xs font-semibold text-accent uppercase tracking-wider pl-0.5">
           Promo Code
         </label>
@@ -125,13 +124,20 @@ export function PriceBreakdown({ basePrice, appliedPromo, setAppliedPromo, isLoa
                 type="text"
                 value={promoInput}
                 onChange={(e) => setPromoInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleApplyPromoDirect();
+                  }
+                }}
                 disabled={isLoading}
                 placeholder="e.g. WELCOME10"
                 className="w-full bg-transparent h-full pl-9 pr-3 rounded-xl text-foreground placeholder:text-muted text-xs outline-none uppercase disabled:opacity-50"
               />
             </div>
             <Button
-              type="submit"
+              type="button"
+              onClick={handleApplyPromoDirect}
               isDisabled={isLoading || !promoInput.trim()}
               className="h-10 px-4 rounded-xl bg-primary text-background font-semibold hover:opacity-90 cursor-pointer text-xs transition-colors duration-200"
             >
@@ -139,7 +145,7 @@ export function PriceBreakdown({ basePrice, appliedPromo, setAppliedPromo, isLoa
             </Button>
           </div>
         )}
-      </form>
+      </div>
     </Card>
   );
 }

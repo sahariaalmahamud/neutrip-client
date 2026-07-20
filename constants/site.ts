@@ -22,8 +22,7 @@ export const SOCIAL_LINKS = {
 export const NAVIGATION_LINKS = {
   main: [
     { label: 'Home', href: '/' },
-    { label: 'Explore', href: '/explore' },
-    { label: 'Destinations', href: '/destinations' },
+    { label: 'Explore Destinations', href: '/destinations' },
     { label: 'AI Planner', href: '/ai-planner' },
     { label: 'Wishlist', href: '/wishlist' },
     { label: 'Reviews', href: '/reviews' },
@@ -34,7 +33,6 @@ export const NAVIGATION_LINKS = {
     { label: 'Contact', href: '/contact' },
     { label: 'Notifications', href: '/notifications' },
     { label: 'Help Center', href: '/help' },
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
+    { label: 'Reviews', href: '/reviews' },
   ],
 } as const;

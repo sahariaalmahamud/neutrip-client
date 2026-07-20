@@ -2,13 +2,12 @@
 
 import React from 'react';
 import { Button } from '@heroui/react';
-import { FaGoogle, FaApple } from 'react-icons/fa';
-import { toast } from 'sonner';
+import { FaGoogle } from 'react-icons/fa';
+
+import { useAuth } from '@/providers/auth-provider';
 
 export function SocialLoginButtons() {
-  const handleSocialClick = (provider: string) => {
-    toast.info(`${provider} OAuth integration is coming soon in the next update!`);
-  };
+  const { loginWithGoogle } = useAuth();
 
   return (
     <div className="flex flex-col gap-3.5 w-full">
@@ -21,27 +20,15 @@ export function SocialLoginButtons() {
         <span className="h-[1px] bg-border/50 flex-grow" />
       </div>
 
-      <div className="grid grid-cols-2 gap-3 w-full">
-        {/* Google Button */}
-        <Button
-          onClick={() => handleSocialClick('Google')}
-          variant="outline"
-          className="h-10.5 rounded-xl border border-border/80 bg-background/50 hover:bg-surface text-foreground font-semibold flex items-center justify-center gap-2 cursor-pointer text-xs transition-colors duration-200"
-        >
-          <FaGoogle className="w-4 h-4 text-primary" />
-          Google
-        </Button>
-
-        {/* Apple Button */}
-        <Button
-          onClick={() => handleSocialClick('Apple')}
-          variant="outline"
-          className="h-10.5 rounded-xl border border-border/80 bg-background/50 hover:bg-surface text-foreground font-semibold flex items-center justify-center gap-2 cursor-pointer text-xs transition-colors duration-200"
-        >
-          <FaApple className="w-4.5 h-4.5" />
-          Apple
-        </Button>
-      </div>
+      {/* Google Button */}
+      <Button
+        onClick={loginWithGoogle}
+        variant="outline"
+        className="w-full h-10.5 rounded-xl border border-border/80 bg-background/50 hover:bg-surface text-foreground font-semibold flex items-center justify-center gap-2 cursor-pointer text-xs transition-colors duration-200"
+      >
+        <FaGoogle className="w-4 h-4 text-primary" />
+        Continue with Google
+      </Button>
     </div>
   );
 }

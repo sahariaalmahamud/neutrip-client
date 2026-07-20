@@ -16,14 +16,14 @@ export function Footer() {
                 <FiCompass className="w-5 h-5 text-background" />
               </div>
               <span className="font-bold tracking-tight text-xl text-foreground">
-                Neu<span className="text-primary group-hover:text-accent transition-colors duration-300">trip</span>
+                Neu<span className="text-primary group-hover:text-accent transition-colors duration-300">Trip</span>
               </span>
             </Link>
-            
+
             <p className="text-sm text-muted max-w-sm leading-relaxed">
               {SITE_DESCRIPTION} Built for the modern traveler seeking smart, customized, and seamless journey planning experiences.
             </p>
-            
+
             {/* Social Icons */}
             <div className="flex items-center gap-3.5 mt-2">
               <a
@@ -108,8 +108,8 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Neutrip Inc. All rights reserved.
           </span>
           <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+            <Link href="/help" className="hover:text-foreground transition-colors">Help Center</Link>
+            <Link href="/contact" className="hover:text-foreground transition-colors">Contact Support</Link>
           </div>
         </div>
       </Container>

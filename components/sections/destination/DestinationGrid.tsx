@@ -7,7 +7,7 @@ import { ExploreDestination } from '@/constants/explore';
 import { FiStar, FiMapPin, FiHeart, FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { fadeUp, staggerChildren } from '@/constants/motion';
-import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/utils/cn';
 
 interface DestinationGridProps {
@@ -16,6 +16,7 @@ interface DestinationGridProps {
 }
 
 export function DestinationGrid({ destinations, onResetFilters }: DestinationGridProps) {
+  const router = useRouter();
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const toggleFavorite = (id: string, e: React.MouseEvent) => {
@@ -32,8 +33,8 @@ export function DestinationGrid({ destinations, onResetFilters }: DestinationGri
     });
   };
 
-  const handleViewDetails = (name: string) => {
-    toast.info(`Itinerary generation details for ${name} coming soon!`);
+  const handleViewDetails = (id: string) => {
+    router.push(`/destinations/${id}`);
   };
 
   if (destinations.length === 0) {
@@ -156,7 +157,7 @@ export function DestinationGrid({ destinations, onResetFilters }: DestinationGri
                     </div>
 
                     <Button
-                      onClick={() => handleViewDetails(dest.name)}
+                      onClick={() => handleViewDetails(dest.id)}
                       variant="ghost"
                       className="rounded-xl border border-border bg-background hover:bg-surface hover:border-primary/50 hover:text-primary text-foreground text-xs font-semibold cursor-pointer py-1.5 px-3 h-8.5 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-1 group/btn"
                     >

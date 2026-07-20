@@ -5,6 +5,7 @@ import { RouterProvider } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { QueryProvider } from './query-provider';
 import { ThemeProvider } from './theme-provider';
+import { AuthProvider } from './auth-provider';
 import { Toaster } from 'sonner';
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -13,10 +14,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryProvider>
       <ThemeProvider>
-        <RouterProvider navigate={router.push}>
-          {children}
-          <Toaster position="top-right" richColors />
-        </RouterProvider>
+        <AuthProvider>
+          <RouterProvider navigate={router.push}>
+            {children}
+            <Toaster position="top-right" richColors />
+          </RouterProvider>
+        </AuthProvider>
       </ThemeProvider>
     </QueryProvider>
   );

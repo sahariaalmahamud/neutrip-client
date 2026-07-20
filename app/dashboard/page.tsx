@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from '@/components/layout/Container';
 import { DashboardHero } from '@/components/sections/dashboard/DashboardHero';
 import { UserProfileCard } from '@/components/sections/dashboard/UserProfileCard';
@@ -12,29 +12,25 @@ import { RecentActivity } from '@/components/sections/dashboard/RecentActivity';
 import { cn } from '@/utils/cn';
 
 export default function DashboardPage() {
-  // Lazily retrieve tab selections from sessionStorage to avoid useEffect setState lint errors
-  const [activeTab, setActiveTab] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('neutrip-dashboard-tab') || 'overview';
-    }
-    return 'overview';
-  });
+  const [activeTab, setActiveTab] = useState<string>('overview');
+  const [expandedTrips, setExpandedTrips] = useState<Set<string>>(new Set());
 
-  // Lazily retrieve expanded trip card IDs from sessionStorage
-  const [expandedTrips, setExpandedTrips] = useState<Set<string>>(() => {
-    if (typeof window !== 'undefined') {
+  useEffect(() => {
+    try {
+      const savedTab = sessionStorage.getItem('neutrip-dashboard-tab');
+      if (savedTab) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setActiveTab(savedTab);
+      }
       const savedExpanded = sessionStorage.getItem('neutrip-dashboard-expanded');
       if (savedExpanded) {
-        try {
-          const parsed = JSON.parse(savedExpanded);
-          return new Set(parsed);
-        } catch (e) {
-          console.error('Failed to parse dashboard expanded session flags:', e);
-        }
+        const parsed = JSON.parse(savedExpanded);
+        setExpandedTrips(new Set(parsed));
       }
+    } catch {
+      // ignore parse errors
     }
-    return new Set();
-  });
+  }, []);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -83,7 +79,7 @@ export default function DashboardPage() {
 
         {/* Dynamic Responsive 12-Column Grid */}
         <div suppressHydrationWarning className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
+
           {/* Main Area Column (Grid-cols span 8) */}
           <div className="lg:col-span-8 flex flex-col gap-8">
             {activeTab === 'overview' && (
@@ -93,7 +89,7 @@ export default function DashboardPage() {
                 <RecentBookings />
               </>
             )}
-            
+
             {activeTab === 'trips' && (
               <UpcomingTrips expandedTrips={expandedTrips} toggleTrip={handleToggleTrip} />
             )}

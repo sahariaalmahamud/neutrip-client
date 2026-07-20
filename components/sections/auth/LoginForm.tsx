@@ -7,11 +7,13 @@ import { loginSchema, LoginInput } from '@/lib/validations/auth';
 import { Button } from '@heroui/react';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiLoader } from 'react-icons/fi';
 import { SocialLoginButtons } from './SocialLoginButtons';
-import { toast } from 'sonner';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
 
+import { useAuth } from '@/providers/auth-provider';
+
 export function LoginForm() {
+  const { loginWithEmail } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
@@ -30,16 +32,14 @@ export function LoginForm() {
     },
   });
 
-  const onSubmitForm = (data: LoginInput) => {
+  const onSubmitForm = async (data: LoginInput) => {
     if (isLoading) return;
     setIsLoading(true);
-
-    // Simulate login server authentication delay
-    setTimeout(() => {
+    try {
+      await loginWithEmail({ email: data.email, password: data.password });
+    } finally {
       setIsLoading(false);
-      console.log('Login submitted:', data);
-      toast.success('Successfully logged in! Redirecting to dashboard...');
-    }, 1500);
+    }
   };
 
   return (

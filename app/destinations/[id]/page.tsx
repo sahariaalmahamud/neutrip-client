@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { Container } from '@/components/layout/Container';
 import { DestinationHero } from '@/components/sections/destination/DestinationHero';
 import { DestinationOverview } from '@/components/sections/destination/DestinationOverview';
@@ -21,16 +20,25 @@ export async function generateStaticParams() {
   }));
 }
 
+function getDestinationById(id: string) {
+  const directMatch = EXPLORE_DESTINATIONS.find((dest) => dest.id === id);
+  if (directMatch) return directMatch;
+
+  const numMatch = id.match(/\d+/);
+  if (numMatch) {
+    const index = (parseInt(numMatch[0], 10) - 1) % EXPLORE_DESTINATIONS.length;
+    if (index >= 0 && index < EXPLORE_DESTINATIONS.length) {
+      return EXPLORE_DESTINATIONS[index];
+    }
+  }
+
+  return EXPLORE_DESTINATIONS[0];
+}
+
 // Generate dynamic SEO metadata matching Next.js 16 requirements
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const destination = EXPLORE_DESTINATIONS.find((dest) => dest.id === id);
-
-  if (!destination) {
-    return {
-      title: 'Destination Not Found | Neutrip',
-    };
-  }
+  const destination = getDestinationById(id);
 
   return {
     title: `${destination.name} Travel Guide | Neutrip`,
@@ -53,11 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // Dynamic Server Component page
 export default async function DestinationPage({ params }: PageProps) {
   const { id } = await params;
-  const destination = EXPLORE_DESTINATIONS.find((dest) => dest.id === id);
-
-  if (!destination) {
-    notFound();
-  }
+  const destination = getDestinationById(id);
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-background">

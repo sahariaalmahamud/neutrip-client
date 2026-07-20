@@ -9,6 +9,8 @@ import { FiStar, FiClock, FiMapPin } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { fadeUp, staggerChildren } from '@/constants/motion';
 
+import Link from 'next/link';
+
 export function FeaturedExperiences() {
   return (
     <Section
@@ -28,7 +30,7 @@ export function FeaturedExperiences() {
             <motion.div key={exp.id} variants={fadeUp}>
               <Card className="group flex flex-col h-full bg-surface border border-border/80 hover:border-primary/45 rounded-2xl overflow-hidden shadow-card transition-all duration-300 hover:shadow-primary/10 hover:-translate-y-2">
                 {/* Card Cover Image */}
-                <div className="h-56 w-full relative overflow-hidden">
+                <Link href={`/destinations/${exp.id}`} className="h-56 w-full relative overflow-hidden block">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={exp.image}
@@ -42,7 +44,7 @@ export function FeaturedExperiences() {
                   <span className="absolute top-4 left-4 z-10 text-[10px] font-extrabold uppercase tracking-wider bg-black/50 backdrop-blur-md text-accent border border-accent/30 px-2.5 py-1 rounded-full">
                     {exp.tag}
                   </span>
-                </div>
+                </Link>
 
                 {/* Card Content Body */}
                 <div className="p-5 flex-1 flex flex-col justify-between text-left">
@@ -54,9 +56,11 @@ export function FeaturedExperiences() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="font-semibold text-base text-foreground leading-snug mb-3 group-hover:text-primary transition-colors duration-200">
-                      {exp.title}
-                    </h3>
+                    <Link href={`/destinations/${exp.id}`}>
+                      <h3 className="font-semibold text-base text-foreground leading-snug mb-3 group-hover:text-primary transition-colors duration-200">
+                        {exp.title}
+                      </h3>
+                    </Link>
 
                     {/* Meta info */}
                     <div className="flex items-center gap-4 text-xs text-muted mb-6">
@@ -82,12 +86,14 @@ export function FeaturedExperiences() {
                       </span>
                     </div>
 
-                    <Button
-                      variant="ghost"
-                      className="rounded-xl border border-border bg-background hover:bg-surface hover:border-primary/50 hover:text-primary text-foreground text-xs font-semibold cursor-pointer py-2 px-4 h-9.5 transition-all duration-300 hover:scale-105 active:scale-95"
-                    >
-                      Book Tour
-                    </Button>
+                    <Link href="/booking">
+                      <Button
+                        variant="ghost"
+                        className="rounded-xl border border-border bg-background hover:bg-surface hover:border-primary/50 hover:text-primary text-foreground text-xs font-semibold cursor-pointer py-2 px-4 h-9.5 transition-all duration-300 hover:scale-105 active:scale-95"
+                      >
+                        Book Tour
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Card>
