@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { Providers } from '@/providers/providers';
 import { DEFAULT_METADATA } from '@/constants/site';
@@ -38,7 +39,13 @@ export default function RootLayout({
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
         </Providers>
+        <Script
+          src="https://aics-sdcf.onrender.com/js/chat-widget.js?v=1784547618242"
+          data-business-id="aec9497ae8a820c3b53b318c6dbba29d"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
 }
+
