@@ -1,0 +1,83 @@
+export const REVIEWS_STORAGE_KEY = 'neutrip_reviews';
+
+export const RATING_FILTER_OPTIONS = [
+  { value: 'all', label: 'All Ratings' },
+  { value: '5', label: '5 Stars' },
+  { value: '4', label: '4 Stars' },
+  { value: '3', label: '3 Stars & below' },
+];
+
+export const SORT_OPTIONS = [
+  { value: 'newest', label: 'Newest First' },
+  { value: 'oldest', label: 'Oldest First' },
+  { value: 'highest', label: 'Highest Rating' },
+  { value: 'lowest', label: 'Lowest Rating' },
+];
+
+export const MOCK_REVIEWS = [
+  {
+    id: 'rev-1',
+    userName: 'Elena Rostova',
+    userAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    destinationId: 'exp-dest-1',
+    destinationName: 'Santorini, Greece',
+    rating: 5,
+    title: 'Unforgettable sunsets over the caldera',
+    comment: 'Staying in Oia was a dream come true. The white-washed villas, sunset views, and local wine tasting tours organized by Neutrip were top-notch!',
+    createdAt: '2026-07-18T14:30:00Z',
+    verified: true,
+    isUserOwned: false,
+  },
+  {
+    id: 'rev-2',
+    userName: 'Marcus Chen',
+    userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    destinationId: 'exp-dest-3',
+    destinationName: 'Kyoto, Japan',
+    rating: 5,
+    title: 'Exceptional cultural journey & serene temples',
+    comment: 'The AI itinerary planned our 5 days in Kyoto perfectly. We avoided crowds at Fushimi Inari and experienced authentic tea ceremonies in Gion.',
+    createdAt: '2026-07-15T09:15:00Z',
+    verified: true,
+    isUserOwned: false,
+  },
+  {
+    id: 'rev-3',
+    userName: 'Sophia Martinez',
+    userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    destinationId: 'exp-dest-2',
+    destinationName: 'Zermatt, Switzerland',
+    rating: 4,
+    title: 'Breathtaking alpine views beneath the Matterhorn',
+    comment: 'The car-free village atmosphere and Matterhorn Glacier Paradise cable car were amazing. Extremely peaceful retreat for hiking enthusiasts.',
+    createdAt: '2026-07-12T11:45:00Z',
+    verified: true,
+    isUserOwned: false,
+  },
+  {
+    id: 'rev-4',
+    userName: 'David Miller',
+    userAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    destinationId: 'exp-dest-4',
+    destinationName: 'Lisbon, Portugal',
+    rating: 4,
+    title: 'Vibrant culture, delicious pastéis, and steep hills',
+    comment: 'Riding Tram 28 and exploring the Alfama district was fantastic. Great seafood dining recommendations included in our Neutrip guide.',
+    createdAt: '2026-07-10T16:20:00Z',
+    verified: false,
+    isUserOwned: false,
+  },
+  {
+    id: 'rev-5',
+    userName: 'Aria Sharma',
+    userAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
+    destinationId: 'exp-dest-5',
+    destinationName: 'Ubud, Bali',
+    rating: 5,
+    title: 'Lush wellness sanctuary and rice terrace views',
+    comment: 'The jungle spa resort stay and early morning terrace walk in Tegallalang were pure magic. Highly recommend visiting in June!',
+    createdAt: '2026-07-05T08:10:00Z',
+    verified: true,
+    isUserOwned: false,
+  },
+];
