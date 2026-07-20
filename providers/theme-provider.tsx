@@ -15,13 +15,15 @@ const ThemeContext = createContext<ThemeProviderContextType>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme') as Theme | null;
-      return savedTheme || 'dark';
+  const [theme, setTheme] = useState<Theme>('dark');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as Theme | null;
+    if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setTheme(savedTheme);
     }
-    return 'dark';
-  });
+  }, []);
 
   useEffect(() => {
     const root = window.document.documentElement;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button } from '@heroui/react';
 import { FiSearch, FiMapPin, FiStar, FiTrash2, FiArrowRight, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,19 +21,6 @@ import { cn } from '@/utils/cn';
 
 const CHEVRON_SVG = `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`;
 
-function loadFromStorage(): WishlistItem[] {
-  if (typeof window === 'undefined') return MOCK_WISHLIST;
-  try {
-    const raw = localStorage.getItem(WISHLIST_STORAGE_KEY);
-    if (raw) return JSON.parse(raw) as WishlistItem[];
-  } catch {
-    // ignore parse errors
-  }
-  // seed with mock data on first visit
-  localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(MOCK_WISHLIST));
-  return MOCK_WISHLIST;
-}
-
 function saveToStorage(items: WishlistItem[]) {
   if (typeof window === 'undefined') return;
   localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
@@ -52,11 +39,25 @@ function formatSavedDate(iso: string): string {
 }
 
 export function WishlistGrid() {
-  const [items, setItems] = useState<WishlistItem[]>(() => loadFromStorage());
+  const [items, setItems] = useState<WishlistItem[]>(MOCK_WISHLIST);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
   const [sort, setSort] = useState<WishlistSortKey>('savedAt');
   const [searchFocused, setSearchFocused] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(WISHLIST_STORAGE_KEY);
+      if (raw) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setItems(JSON.parse(raw) as WishlistItem[]);
+      } else {
+        localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(MOCK_WISHLIST));
+      }
+    } catch {
+      // ignore parse errors
+    }
+  }, []);
 
   const handleRemove = (id: string, name: string) => {
     setItems((prev) => {
