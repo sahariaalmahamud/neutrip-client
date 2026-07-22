@@ -65,7 +65,7 @@ export function Header() {
               <FiCompass className="w-5 h-5 text-background" />
             </div>
             <span className="font-bold tracking-tight text-xl text-foreground">
-              Neu<span className="text-primary group-hover:text-accent transition-colors duration-300">trip</span>
+              Neu<span className="text-primary group-hover:text-accent transition-colors duration-300">Trip</span>
             </span>
           </Link>
 

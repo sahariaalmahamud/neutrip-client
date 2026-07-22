@@ -1,4 +1,3 @@
-import React from 'react';
 import { AuthLayout } from '@/components/sections/auth/AuthLayout';
 import { LoginForm } from '@/components/sections/auth/LoginForm';
 import { Metadata } from 'next';
